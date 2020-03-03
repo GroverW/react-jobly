@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb="get") {
-    paramsOrData.token = (
+    paramsOrData._token = (
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
       "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30." +
       "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U"
@@ -35,13 +35,13 @@ class JoblyApi {
     return res.job;
   }
 
-  static async getJobs() {
-    let res = await this.request(`jobs`);
+  static async getJobs(data) {
+    let res = await this.request(`jobs`, data);
     return res.jobs;
   }
 
-  static async getCompanies() {
-    let res = await this.request(`companies`);
+  static async getCompanies(data) {
+    let res = await this.request(`companies`, data);
     return res.companies;
   }
 
@@ -50,14 +50,29 @@ class JoblyApi {
     return res.job;
   }
 
+  static async addCompany(data) {
+    let res = await this.request('companies', data, 'post');
+    return res.company;
+  }
+
   static async updateJob(data) {
     let res = await this.request('jobs', data, 'patch');
     return res.job;
   }
 
+  static async updateCompany(data) {
+    let res = await this.request('companies', data, 'patch');
+    return res.company;
+  }
+
   static async deleteJob(id) {
     let res = await this.request(`jobs/${id}`, {}, 'delete');
-    return res.job;
+    return res.message;
+  }
+
+  static async deleteCompany(handle) {
+    let res = await this.request(`companies/${handle}`, {}, 'delete');
+    return res.message;
   }
 
   static async applyToJob(id) {

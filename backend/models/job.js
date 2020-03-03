@@ -35,6 +35,11 @@ class Job {
       whereExpressions.push(`title ILIKE $${queryValues.length}`);
     }
 
+    if (data.company_handle) {
+      queryValues.push(data.company_handle);
+      whereExpressions.push(`company_handle = $${queryValues.length}`);
+    }
+
     if (whereExpressions.length > 0) {
       baseQuery += " WHERE ";
     }
