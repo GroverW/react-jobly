@@ -22,9 +22,9 @@ class JoblyApi {
     }
   }
 
-  static async login({username, password}) {
+  static async login(data) {
     try {
-      let res = await this.request('login',{username, password}, 'post');
+      let res = await this.request('login', data, 'post');
       
       if(res.token) {
         localStorage.setItem("token", JSON.stringify(res.token));
@@ -37,6 +37,22 @@ class JoblyApi {
       return err;
     }
 
+  }
+
+  static async signUp(data) {
+    try {
+      let res = await this.request('users', data, 'post');
+      
+      if(res.token) {
+        localStorage.setItem("token", JSON.stringify(res.token));
+      }
+  
+      return res;
+    }
+    
+    catch(err) {
+      return err;
+    }
   }
 
   static async getCompany(handle) {

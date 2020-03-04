@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Jobs from './Jobs';
 import Login from './Login';
+import SignUp from './SignUp';
 import Profile from './Profile';
 import Company from './Company';
 import Companies from './Companies';
@@ -11,7 +12,7 @@ import NotFound from './NotFound';
 
 
 
-function Routes() {
+function Routes({ logIn }) {
 
   return (
     <Switch>
@@ -20,7 +21,10 @@ function Routes() {
         <Jobs />
       </Route>
       <Route exact path="/login">
-        <Login />
+        <Login logIn={logIn}/>
+      </Route>
+      <Route exact path="/signup">
+        <SignUp logIn={logIn}/>
       </Route>
       <Route exact path="/profile">
         <Profile />

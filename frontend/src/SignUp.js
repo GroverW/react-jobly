@@ -6,13 +6,16 @@ import { Link, useHistory } from 'react-router-dom';
 
 const INITIAL_STATE = {
   username: "",
-  password: ""
+  password: "",
+  first_name: "",
+  last_name: "",
+  email: ""
 }
 
-function Login({ logIn }) {
+function SignUp({ logIn }) {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const history = useHistory();
-  const [isAlert, setIsAlert] = useState(false);
+  const [alerts, setAlerts] = useState(null);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -25,15 +28,13 @@ function Login({ logIn }) {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    const resp = await JoblyApi.login(formData)
+    const resp = await JoblyApi.signUp(formData)
     if (!resp.token) {
-      setIsAlert(true);
+      setAlerts(resp.map(message => <Alert text={message} />));
     } else {
       logIn();
       history.push('/jobs')
     }
-
-
   }
 
   return (
@@ -52,11 +53,33 @@ function Login({ logIn }) {
         value={formData.password}
         onChange={handleChange}
       />
+      <label htmlFor="first_name">First Name</label>
+      <input id="first_name"
+        name="first_name"
+        type="first_name"
+        value={formData.first_name}
+        onChange={handleChange}
+      />
+      <label htmlFor="last_name">Last Name</label>
+      <input id="last_name"
+        name="last_name"
+        type="last_name"
+        value={formData.last_name}
+        onChange={handleChange}
+      />
+      <label htmlFor="email">Email</label>
+      <input id="email"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+
       <button onClick={handleSubmit}>Submit</button>
-      <Link to="/signup">Not registered? Sign up here</Link>
-      {isAlert ? <Alert text="Invalid Credentials" /> : ""}
+      <Link to="/login">Already registered? Log in here</Link>
+      {alerts}
     </form>
   )
 }
 
-export default Login;
+export default SignUp;
