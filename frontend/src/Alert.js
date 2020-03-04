@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Alert({ text }) {
+function Alert({ type="danger", text }) {
   
-  return <div>{text}</div>
+  return <div className={type}>{text}</div>
 }
 
 export default Alert;

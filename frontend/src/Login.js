@@ -32,8 +32,6 @@ function Login({ logIn }) {
       logIn();
       history.push('/jobs')
     }
-
-
   }
 
   return (

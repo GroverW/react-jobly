@@ -13,6 +13,7 @@ function App() {
   }
 
   const logOut = () => {
+    localStorage.removeItem("username");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   }

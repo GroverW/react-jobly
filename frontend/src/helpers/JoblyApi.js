@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 class JoblyApi {
-  static async request(endpoint, paramsOrData = {}, verb="get") {
+  static async request(endpoint, paramsOrData = {}, verb = "get") {
     paramsOrData._token = JSON.parse(localStorage.getItem("token"));
-      //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE1ODMyODA2ODh9.eCsM9mDHNw089rskD1guovjoVw-PN8_FpAM6i7vXaOs"
+    //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE1ODMyODA2ODh9.eCsM9mDHNw089rskD1guovjoVw-PN8_FpAM6i7vXaOs"
 
     console.debug("API Call:", endpoint, paramsOrData, verb);
 
@@ -15,7 +15,7 @@ class JoblyApi {
       })).data
     }
 
-    catch(err) {
+    catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.message;
       throw Array.isArray(message) ? message : [message];
@@ -25,15 +25,16 @@ class JoblyApi {
   static async login(data) {
     try {
       let res = await this.request('login', data, 'post');
-      
-      if(res.token) {
+
+      if (res.token) {
+        localStorage.setItem("username", data.username);
         localStorage.setItem("token", JSON.stringify(res.token));
       }
-  
+
       return res;
 
     }
-    catch(err) {
+    catch (err) {
       return err;
     }
 
@@ -42,15 +43,50 @@ class JoblyApi {
   static async signUp(data) {
     try {
       let res = await this.request('users', data, 'post');
-      
-      if(res.token) {
+
+      if (res.token) {
+        localStorage.setItem("username", data.username);
         localStorage.setItem("token", JSON.stringify(res.token));
       }
-  
+
       return res;
     }
-    
-    catch(err) {
+
+    catch (err) {
+      return err;
+    }
+  }
+
+  static async getCurrentUser() {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      if (token) {
+        const username = localStorage.getItem("username");
+        let res = await this.request(`users/${username}`);
+
+        return res.user;
+      }
+    }
+
+    catch (err) {
+      return err;
+    }
+  }
+
+  static async patchUser(data) {
+    try {
+      const { username, jobs, ...patchData } = data;
+
+      if(!patchData.photo_url) {
+        delete patchData.photo_url;
+      }
+
+      let res = await this.request(`users/${username}`, patchData, 'patch');
+
+      return res.user;
+    }
+
+    catch (err) {
       return err;
     }
   }
