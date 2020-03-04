@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Alert from './Alert';
 import JoblyApi from "./helpers/JoblyApi";
 import { Link, useHistory } from 'react-router-dom';
+import UserContext from './UserContext';
 
 
 const INITIAL_STATE = {
@@ -12,9 +13,10 @@ const INITIAL_STATE = {
   email: ""
 }
 
-function SignUp({ logIn }) {
+function SignUp() {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const history = useHistory();
+  const { logIn } = useContext(UserContext);
   const [alerts, setAlerts] = useState(null);
 
   const handleChange = (evt) => {
@@ -32,7 +34,7 @@ function SignUp({ logIn }) {
     if (!resp.token) {
       setAlerts(resp.map(message => <Alert text={message} />));
     } else {
-      logIn();
+      logIn(resp);
       history.push('/jobs')
     }
   }

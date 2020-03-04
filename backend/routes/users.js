@@ -23,6 +23,20 @@ router.get("/", authRequired, async function(req, res, next) {
   }
 });
 
+/** GET /self => {user: user}
+ * 
+ *  Gets user data from user associated with username inside token payload
+ */
+
+router.get("/self", authRequired, async function(req, res, next) {
+  try {
+    const user = await User.findOne(req.username);
+    return res.json({ user });
+  } catch (err) {
+    return next(err);
+  }
+})
+
 /** GET /[username] => {user: user} */
 
 router.get("/:username", authRequired, async function(req, res, next) {
@@ -34,7 +48,7 @@ router.get("/:username", authRequired, async function(req, res, next) {
   }
 });
 
-/** POST / {userdata}  => {token: token} */
+/** POST / {userdata}  => {token: token, user: user} */
 
 router.post("/", async function(req, res, next) {
   try {
@@ -48,9 +62,9 @@ router.post("/", async function(req, res, next) {
       });
     }
 
-    const newUser = await User.register(req.body);
-    const token = createToken(newUser);
-    return res.status(201).json({ token });
+    const user = await User.register(req.body);
+    const token = createToken(user);
+    return res.status(201).json({ token, user });
   } catch (e) {
     return next(e);
   }

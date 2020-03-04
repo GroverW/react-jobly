@@ -12,7 +12,9 @@ import NotFound from './NotFound';
 
 
 
-function Routes({ logIn }) {
+function Routes() {
+
+
 
   return (
     <Switch>
@@ -21,10 +23,10 @@ function Routes({ logIn }) {
         <Jobs />
       </Route>
       <Route exact path="/login">
-        <Login logIn={logIn}/>
+        <Login />
       </Route>
       <Route exact path="/signup">
-        <SignUp logIn={logIn}/>
+        <SignUp />
       </Route>
       <Route exact path="/profile">
         <Profile />

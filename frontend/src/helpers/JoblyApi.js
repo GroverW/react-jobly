@@ -25,14 +25,7 @@ class JoblyApi {
   static async login(data) {
     try {
       let res = await this.request('login', data, 'post');
-
-      if (res.token) {
-        localStorage.setItem("username", data.username);
-        localStorage.setItem("token", JSON.stringify(res.token));
-      }
-
       return res;
-
     }
     catch (err) {
       return err;
@@ -43,12 +36,6 @@ class JoblyApi {
   static async signUp(data) {
     try {
       let res = await this.request('users', data, 'post');
-
-      if (res.token) {
-        localStorage.setItem("username", data.username);
-        localStorage.setItem("token", JSON.stringify(res.token));
-      }
-
       return res;
     }
 
@@ -59,15 +46,9 @@ class JoblyApi {
 
   static async getCurrentUser() {
     try {
-      const token = JSON.parse(localStorage.getItem("token"));
-      if (token) {
-        const username = localStorage.getItem("username");
-        let res = await this.request(`users/${username}`);
-
-        return res.user;
-      }
+      let res = await this.request(`users/self`); //token is added as part of request from localstorage
+      return res.user;
     }
-
     catch (err) {
       return err;
     }

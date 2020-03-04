@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import UserContext from './UserContext';
 
-function NavBar({ isLoggedIn, logOut }) {
+function NavBar() {
+  const { currentUser, logOut } = useContext(UserContext);
   
   const loggedInJSX = (
     <nav>
@@ -21,7 +23,7 @@ function NavBar({ isLoggedIn, logOut }) {
     </nav>
   )
   
-  return isLoggedIn ? loggedInJSX : loggedOutJSX
+  return currentUser ? loggedInJSX : loggedOutJSX
 }
 
 export default NavBar;

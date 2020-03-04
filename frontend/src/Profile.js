@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Alert from './Alert';
 import JoblyApi from './helpers/JoblyApi';
 import { useHistory } from 'react-router-dom';
+import UserContext from "./UserContext"
 
 const INITIAL_STATE = {
   username: "",
@@ -13,25 +14,22 @@ const INITIAL_STATE = {
 }
 
 function Profile() {
+  const { currentUser, updateCurrentUser } = useContext(UserContext);
   const [userData, setUserData] = useState(INITIAL_STATE);
   const history = useHistory();
   const [alerts, setAlerts] = useState(null);
 
   useEffect(() => {
-    const getUserData = async () => {
-      const resp = await JoblyApi.getCurrentUser();
-
-      
-      if (resp.username) {
+    const getUserData = () => {
+      if (currentUser) {
         setUserData(oldData => ({
-          ...resp,
+          ...currentUser,
           password: oldData.password
         }));
       } else {
         history.push('/login')
       }
     }
-
     getUserData();
   },[]);
 
@@ -47,7 +45,6 @@ function Profile() {
     evt.preventDefault();
 
     const resp = await JoblyApi.patchUser(userData)
-    console.log(resp);
     if (!resp.username) {
       setAlerts(resp.map((message, idx) => <Alert key={idx} text={message} />));
     } else {
@@ -55,7 +52,8 @@ function Profile() {
         ...resp,
         password: ""
       }));
-      setAlerts(<Alert type="primary" text="Changes saved." />)
+      updateCurrentUser(resp);
+      setAlerts(<Alert type="success" text="Changes saved." />)
     }
   }
 

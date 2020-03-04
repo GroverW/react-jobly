@@ -1,30 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './NavBar';
 import Routes from './Routes';
+import JoblyApi from './helpers/JoblyApi';
+import UserContext from './UserContext';
 
 function App() {
-  const INITIAL_STATE = Boolean(localStorage.getItem("token"));
-  const [isLoggedIn, setIsLoggedIn] = useState(INITIAL_STATE);
+  const token = localStorage.getItem("token");
+  const [isLoading, setIsLoading] = useState(Boolean(token))
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const logIn = () => {
-    setIsLoggedIn(true);
+  const logIn = ({token, user}) => {
+    localStorage.setItem("token", JSON.stringify(token));
+    setCurrentUser(user);
   }
 
   const logOut = () => {
-    localStorage.removeItem("username");
     localStorage.removeItem("token");
-    setIsLoggedIn(false);
+    setCurrentUser(null);
   }
-  return (
+
+  const updateCurrentUser = (user) => {
+    setCurrentUser(user)
+  }
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      const userResult = await JoblyApi.getCurrentUser();
+      if(userResult.username) {
+        setCurrentUser(userResult);
+      }
+      setIsLoading(false);
+    }
+    verifyToken();
+  }, []);
+
+  const loadedJSX = (
     <div className="App">
-      <BrowserRouter>
-        <NavBar isLoggedIn={isLoggedIn} logOut={logOut}/>
-        <Routes logIn={logIn}/>
-      </BrowserRouter>
-    </div>
-  );
+      <UserContext.Provider value={{currentUser, updateCurrentUser, logIn, logOut }}>
+        <BrowserRouter>
+          <NavBar />
+          <Routes />
+        </BrowserRouter>
+      </UserContext.Provider>
+    </div>)
+  return isLoading ? <div>Loading...</div> : loadedJSX;
 }
 
 export default App;
+
+
+
