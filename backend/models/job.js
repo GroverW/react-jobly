@@ -141,12 +141,14 @@ class Job {
   /** Apply for job: update db, returns undefined. */
 
   static async apply(id, username, state) {
+    console.log("APPLICATION", id, username, state);
       const result = await db.query(
           `SELECT id 
             FROM jobs 
             WHERE id = $1`,
           [id]);
 
+      console.log("JOB!!", result);
       if (result.rows.length === 0) {
         let notFound = new Error(`There exists no job '${id}`);
         notFound.status = 404;

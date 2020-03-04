@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
-function Search({ filterCompanies }) {
+function Search({ filter }) {
   const [formData, setFormData] = useState("");
 
   const handleChange = (evt) => {
-    // evt.preventDefault();
     const value = evt.target.value
     setFormData(value);
   }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    filterCompanies(formData);
+    filter(formData);
   }
 
 
