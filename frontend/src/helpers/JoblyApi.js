@@ -2,9 +2,8 @@ import axios from 'axios';
 
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb="get") {
-    paramsOrData._token = (
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE1ODMyODA2ODh9.eCsM9mDHNw089rskD1guovjoVw-PN8_FpAM6i7vXaOs"
-    );
+    paramsOrData._token = JSON.parse(localStorage.getItem("token"));
+      //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE1ODMyODA2ODh9.eCsM9mDHNw089rskD1guovjoVw-PN8_FpAM6i7vXaOs"
 
     console.debug("API Call:", endpoint, paramsOrData, verb);
 
@@ -21,6 +20,23 @@ class JoblyApi {
       let message = err.response.data.message;
       throw Array.isArray(message) ? message : [message];
     }
+  }
+
+  static async login({username, password}) {
+    try {
+      let res = await this.request('login',{username, password}, 'post');
+      
+      if(res.token) {
+        localStorage.setItem("token", JSON.stringify(res.token));
+      }
+  
+      return res;
+
+    }
+    catch(err) {
+      return err;
+    }
+
   }
 
   static async getCompany(handle) {
