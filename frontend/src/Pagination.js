@@ -23,7 +23,8 @@ function Pagination({ setStartSliceIndex, currentStartIndex, arrayLength, numIte
   }
 
   const pageButtons = new Array(totalPages).fill(null).map((val,ind) => 
-    <button 
+    <button
+      key={ind}
       onClick={() => setCurrentPage(ind + 1)}
       disabled={ind + 1 === currentPage}>
         {ind + 1}
