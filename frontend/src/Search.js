@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function Search({ filter }) {
   const [formData, setFormData] = useState("");
@@ -11,7 +11,15 @@ function Search({ filter }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     filter(formData);
+    //somehow implement clearTimeout when submitted
   }
+
+  const timerId = useRef(null);
+  useEffect(() => {
+    timerId.current = setTimeout(() => filter(formData), 1000)
+
+    return () => clearTimeout(timerId.current);
+  }, [formData, filter])
 
 
   return (

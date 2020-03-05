@@ -8,38 +8,34 @@ import Company from './Company';
 import Companies from './Companies';
 import Home from './Home';
 import NotFound from './NotFound';
-
-
-
+import PrivateRoute from './PrivateRoute';
 
 function Routes() {
-
-
 
   return (
     <Switch>
 
-      <Route exact path="/jobs">
-        <Jobs />
-      </Route>
       <Route exact path="/login">
         <Login />
       </Route>
       <Route exact path="/signup">
         <SignUp />
       </Route>
-      <Route exact path="/profile">
+      <PrivateRoute exact path="/jobs">
+        <Jobs />
+      </PrivateRoute>
+      <PrivateRoute exact path="/profile">
         <Profile />
-      </Route>
-      <Route exact path="/companies/:handle">
+      </PrivateRoute>
+      <PrivateRoute exact path="/companies/:handle">
         <Company />
-      </Route>
-      <Route exact path="/companies">
+      </PrivateRoute>
+      <PrivateRoute exact path="/companies">
         <Companies />
-      </Route>
-      <Route exact path="/">
+      </PrivateRoute>
+      <PrivateRoute exact path="/">
         <Home />
-      </Route>
+      </PrivateRoute>
       <Route>
         <NotFound />
       </Route>

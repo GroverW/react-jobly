@@ -1,37 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Alert from './Alert';
 import JoblyApi from './helpers/JoblyApi';
-import { useHistory } from 'react-router-dom';
 import UserContext from "./UserContext"
-
-const INITIAL_STATE = {
-  username: "",
-  first_name: "",
-  last_name: "",
-  email: "",
-  photo_url: "",
-  password: "",
-}
 
 function Profile() {
   const { currentUser, updateCurrentUser } = useContext(UserContext);
-  const [userData, setUserData] = useState(INITIAL_STATE);
-  const history = useHistory();
+  const [userData, setUserData] = useState({
+    ...currentUser,
+    photo_url: currentUser.photo_url || "",
+    password: ""
+  });
   const [alerts, setAlerts] = useState(null);
-
-  useEffect(() => {
-    const getUserData = () => {
-      if (currentUser) {
-        setUserData(oldData => ({
-          ...currentUser,
-          password: oldData.password
-        }));
-      } else {
-        history.push('/login')
-      }
-    }
-    getUserData();
-  },[]);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -50,6 +29,7 @@ function Profile() {
     } else {
       setUserData(oldData => ({
         ...resp,
+        photo_url: resp.photo_url || "",
         password: ""
       }));
       updateCurrentUser(resp);

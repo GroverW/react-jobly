@@ -16,7 +16,7 @@ function Company() {
       setJobsList(jobsResult);
     }
     updateState();
-  }, [])
+  }, [handle])
 
   let companyJSX = <div>Company info loading</div>;
   let jobsJSX = <div>Job list loading</div>;
