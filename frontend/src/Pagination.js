@@ -9,15 +9,6 @@ function Pagination({ setStartSliceIndex, currentStartIndex, arrayLength, numIte
 
   const totalPages = Math.floor(arrayLength / numItemsPerPage) + Number(arrayLength % numItemsPerPage !== 0);
 
-  // const handleBack = () => {
-  //   setStartSliceIndex(Math.max(0, currentStartIndex - numItemsPerPage));
-  // }
-  // const handleForward = () => {
-  //   if(currentPage < totalPages) {
-  //     setStartSliceIndex(currentStartIndex + numItemsPerPage);
-  //   }
-  // }
-
   const setCurrentPage = (pageNum) => {
     setStartSliceIndex((pageNum - 1) * numItemsPerPage);
   }

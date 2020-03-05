@@ -15,10 +15,14 @@ function Search({ filter }) {
   }
 
   const timerId = useRef(null);
+  const didMount = useRef(false);
   useEffect(() => {
-    timerId.current = setTimeout(() => filter(formData), 1000)
-
-    return () => clearTimeout(timerId.current);
+    if(didMount.current) {
+      timerId.current = setTimeout(() => filter(formData), 1000)
+      
+      return () => clearTimeout(timerId.current);
+    }
+    didMount.current = true;
   }, [formData, filter])
 
 
