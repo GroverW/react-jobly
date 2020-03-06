@@ -1,0 +1,65 @@
+.SignUp {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.SignUp h1 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.SignUp-form {
+  background-color: white;
+  padding: 20px;
+}
+
+.SignUp-form div {
+  margin-bottom: 15px;
+}
+
+.SignUp-form input {
+  box-sizing: border-box;
+  display: block;
+  margin-top: 5px;
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid rgb(200,200,200);
+  color: rgb(100,100,100);
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.SignUp-form input:focus {
+  border: 1px solid rgb(36, 143, 231);
+}
+
+.SignUp-form button {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  background-color: rgb(8, 126, 223);
+  cursor: pointer;
+  color: white;
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.SignUp-form button:hover {
+  background-color: rgb(0, 106, 192);
+}
+
+.SignUp-form button:disabled {
+  background-color: rgb(46, 148, 231);
+  cursor: default;
+}
+
+div.SignUp-registered {
+  margin-top: 20px;
+  margin-bottom: 0;
+}

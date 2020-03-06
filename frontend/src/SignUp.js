@@ -3,6 +3,7 @@ import Alert from './Alert';
 import JoblyApi from "./helpers/JoblyApi";
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from './UserContext';
+import './SignUp.css';
 
 
 const INITIAL_STATE = {
@@ -40,47 +41,61 @@ function SignUp() {
   }
 
   return (
-    <form>
-      <label htmlFor="username">Username</label>
-      <input id="username"
-        name="username"
-        type="text"
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <label htmlFor="password">Password</label>
-      <input id="password"
-        name="password"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <label htmlFor="first_name">First Name</label>
-      <input id="first_name"
-        name="first_name"
-        type="first_name"
-        value={formData.first_name}
-        onChange={handleChange}
-      />
-      <label htmlFor="last_name">Last Name</label>
-      <input id="last_name"
-        name="last_name"
-        type="last_name"
-        value={formData.last_name}
-        onChange={handleChange}
-      />
-      <label htmlFor="email">Email</label>
-      <input id="email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-
-      <button onClick={handleSubmit}>Submit</button>
-      <Link to="/login">Already registered? Log in here</Link>
-      {alerts}
-    </form>
+    <div className="SignUp">
+      <h1>Sign Up</h1>
+      <form className="SignUp-form">
+        <div>
+          <label htmlFor="username">Username</label>
+          <input id="username"
+            name="username"
+            type="text"
+            value={formData.username}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input id="password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="first_name">First Name</label>
+          <input id="first_name"
+            name="first_name"
+            type="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="last_name">Last Name</label>
+          <input id="last_name"
+            name="last_name"
+            type="last_name"
+            value={formData.last_name}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input id="email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <button onClick={handleSubmit}>Submit</button>
+        <div className="SignUp-registered">
+        <Link to="/login">Already registered? Log in here</Link>
+        </div>
+        {alerts}
+      </form>
+    </div>
   )
 }
 

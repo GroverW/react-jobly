@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import Alert from './Alert';
 import JoblyApi from './helpers/JoblyApi';
-import UserContext from "./UserContext"
+import UserContext from "./UserContext";
+import './Profile.css';
 
 function Profile() {
   const { currentUser, updateCurrentUser } = useContext(UserContext);
@@ -40,49 +41,59 @@ function Profile() {
 
 
   return (
-    <div>
+    <div className="Profile">
       <h1>Profile</h1>
-      <form>
+      <form className="Profile-form">
         <label>Username</label>
-        <div>{userData.username}</div>
-        <label htmlFor="first_name">First Name</label>
-        <input type="text"
+        <div className="Profile-username">{userData.username}</div>
+        <div>
+          <label htmlFor="first_name">First Name</label>
+          <input type="text"
             id="first_name"
             name="first_name"
             value={userData.first_name}
             onChange={handleChange}
-        />
-        <label htmlFor="last_name">Last Name</label>
-        <input type="text"
+          />
+        </div>
+        <div>
+          <label htmlFor="last_name">Last Name</label>
+          <input type="text"
             id="last_name"
             name="last_name"
             value={userData.last_name}
             onChange={handleChange}
-        />
-        <label htmlFor="email">Email</label>
-        <input type="text"
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input type="text"
             id="email"
             name="email"
             value={userData.email}
             onChange={handleChange}
-        />
-        <label htmlFor="photo_url">Photo URL</label>
-        <input type="text"
+          />
+        </div>
+        <div>
+          <label htmlFor="photo_url">Photo URL</label>
+          <input type="text"
             id="photo_url"
             name="photo_url"
             value={userData.photo_url}
             onChange={handleChange}
-        />
-        <label htmlFor="password">Re-enter Password</label>
-        <input type="password"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Re-enter Password</label>
+          <input type="password"
             id="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
-        />
-        <button onClick={handleSubmit}>Save Changes</button>
+          />
+        </div>
+        <button disabled={userData.password === ""} onClick={handleSubmit}>Save Changes</button>
+        {alerts}
       </form>
-      {alerts}
     </div>
   )
 }

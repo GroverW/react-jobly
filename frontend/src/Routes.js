@@ -9,38 +9,39 @@ import Companies from './Companies';
 import Home from './Home';
 import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
+import './Routes.css';
 
 function Routes() {
 
   return (
-    <Switch>
-
-      <Route exact path="/login">
-        <Login />
-      </Route>
-      <Route exact path="/signup">
-        <SignUp />
-      </Route>
-      <PrivateRoute exact path="/jobs">
-        <Jobs />
-      </PrivateRoute>
-      <PrivateRoute exact path="/profile">
-        <Profile />
-      </PrivateRoute>
-      <PrivateRoute exact path="/companies/:handle">
-        <Company />
-      </PrivateRoute>
-      <PrivateRoute exact path="/companies">
-        <Companies />
-      </PrivateRoute>
-      <PrivateRoute exact path="/">
-        <Home />
-      </PrivateRoute>
-      <Route>
-        <NotFound />
-      </Route>
-
-    </Switch>
+    <div className="Container">
+      <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/signup">
+          <SignUp />
+        </Route>
+        <PrivateRoute exact path="/jobs">
+          <Jobs />
+        </PrivateRoute>
+        <PrivateRoute exact path="/profile">
+          <Profile />
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies/:handle">
+          <Company />
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies">
+          <Companies />
+        </PrivateRoute>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
+    </div>
   )
 }
 

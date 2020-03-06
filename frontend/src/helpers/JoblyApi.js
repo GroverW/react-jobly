@@ -57,7 +57,7 @@ class JoblyApi {
 
   static async patchUser(data) {
     try {
-      const { username, jobs, ...patchData } = data;
+      const { username, jobs, is_admin, ...patchData } = data;
 
       if(!patchData.photo_url) {
         delete patchData.photo_url;

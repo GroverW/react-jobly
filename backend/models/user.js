@@ -148,7 +148,7 @@ class User {
     }
 
     delete user.password;
-    delete user.is_admin;
+    // delete user.is_admin;
 
     return result.rows[0];
   }

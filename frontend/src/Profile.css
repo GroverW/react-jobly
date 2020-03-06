@@ -1,0 +1,64 @@
+.Profile {
+  text-align: left;
+}
+
+.Profile h1 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.Profile-form {
+  background-color: white;
+  padding: 20px;
+}
+
+.Profile-form div {
+  margin-bottom: 15px;
+}
+
+.Profile-username {
+  margin: 15px 0;
+  color: rgb(100,100,100);
+}
+
+.Profile-form input {
+  box-sizing: border-box;
+  display: block;
+  margin-top: 5px;
+  height: 40px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  outline: none;
+  border: 1px solid rgb(200,200,200);
+  color: rgb(100,100,100);
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.Profile-form input:focus {
+  border: 1px solid rgb(36, 143, 231);
+}
+
+.Profile-form button {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  background-color: rgb(8, 126, 223);
+  cursor: pointer;
+  color: white;
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.Profile-form button:hover {
+  background-color: rgb(0, 106, 192);
+}
+
+.Profile-form button:disabled {
+  background-color: rgb(46, 148, 231);
+  cursor: default;
+}

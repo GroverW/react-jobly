@@ -1,0 +1,27 @@
+.Home {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.Home h1 {
+  font-weight: 600;
+  margin: 0;
+}
+
+.Home h3 {
+  font-weight: 500;
+  color: rgb(100,100,100);
+}
+
+.Home a {
+  background-color: rgb(8, 126, 223);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 3px;
+}
+
+.Home a:hover {
+  background-color: rgb(0, 106, 192);
+}
+

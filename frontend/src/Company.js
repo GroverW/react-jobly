@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import JoblyApi from "./helpers/JoblyApi";
 import JobCard from './JobCard';
+import './Company.css';
 
 function Company() {
   const { handle } = useParams();
@@ -36,7 +37,7 @@ function Company() {
   }
 
   return (
-    <div>
+    <div className="Company">
       {companyJSX}
       {jobsJSX}
     </div>

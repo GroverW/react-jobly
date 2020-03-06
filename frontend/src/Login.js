@@ -3,6 +3,7 @@ import Alert from './Alert';
 import JoblyApi from "./helpers/JoblyApi";
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from './UserContext';
+import './Login.css';
 
 
 const INITIAL_STATE = {
@@ -37,25 +38,34 @@ function Login() {
   }
 
   return (
-    <form>
-      <label htmlFor="username">Username</label>
-      <input id="username"
-        name="username"
-        type="text"
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <label htmlFor="password">Password</label>
-      <input id="password"
-        name="password"
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <button onClick={handleSubmit}>Submit</button>
-      <Link to="/signup">Not registered? Sign up here</Link>
-      {isAlert ? <Alert text="Invalid Credentials" /> : ""}
-    </form>
+    <div className="Login">
+      <h1>Login</h1>
+      <form className="Login-form">
+        <div>
+          <label htmlFor="username">Username</label>
+          <input id="username"
+            name="username"
+            type="text"
+            value={formData.username}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input id="password"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        <button onClick={handleSubmit}>Submit</button>
+        <div className="Login-not-registered">
+          <Link to="/signup">Not registered? Sign up here</Link>
+        </div>
+        {isAlert ? <Alert text="Invalid Credentials" /> : ""}
+      </form>
+    </div>
   )
 }
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './Search.css';
 
 function Search({ filter }) {
   const [formData, setFormData] = useState("");
@@ -27,7 +28,8 @@ function Search({ filter }) {
 
 
   return (
-    <form>
+    <form className="Search">
+      <div className="Search-container">
       <input 
         onChange={handleChange}
         type="text"
@@ -35,6 +37,7 @@ function Search({ filter }) {
         placeholder="Enter search term..."
         value={formData} />
       <button onClick={handleSubmit}>Submit</button>
+      </div>
     </form>
   )
 }

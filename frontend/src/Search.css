@@ -1,0 +1,37 @@
+.Search-container {
+  display: flex;
+  margin-top: 20px;
+  background-color: white;
+  width: 600px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.1);
+}
+
+.Search button {
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: rgb(1, 114, 206);
+  color: white;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 18px;
+  line-height: 40px;
+  flex-grow: 0;
+  border: none;
+}
+
+.Search input {
+  box-sizing: border-box;
+  padding: 0 10px;
+  height: 40px;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  line-height: 40px;
+  flex-grow: 1;
+  color: rgb(100,100,100);
+}

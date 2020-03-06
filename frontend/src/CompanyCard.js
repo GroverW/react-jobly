@@ -9,11 +9,12 @@ function CompanyCard({ company }) {
   return (
     <div className="CompanyCard" 
       onClick={() => history.push(`/companies/${company.handle}`)}>
-      <div>{company.name}</div>
-      <div>{company.description}</div>
-      <div>
+      
+      <div className="CompanyCard-title">
+        {company.name}
         <img src={company.logo_url || companyLogo} alt="company logo"/>
       </div>
+      <div className="CompanyCard-description">{company.description}</div>
     </div>
   )
 }

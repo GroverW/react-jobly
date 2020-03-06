@@ -1,3 +1,28 @@
 .CompanyCard {
   cursor: pointer;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 10px 0px;
+  padding: 20px;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.1);
+  text-align: left;
+  min-height: 140px;
+  color: rgb(100,100,100);
+}
+
+.CompanyCard:Hover {
+  color: rgb(27, 125, 206);
+  box-shadow: 0 0 5px 2px rgba(0,0,0,.3);
+}
+
+.CompanyCard img {
+  max-width: 50px;
+  max-height: 50px;
+  float:right;
+  font-size: 11px;
+}
+
+.CompanyCard-title {
+  font-size: 18px;
+  height: 55px;
 }
