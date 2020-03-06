@@ -24,7 +24,7 @@ function Search({ filter }) {
       return () => clearTimeout(timerId.current);
     }
     didMount.current = true;
-  }, [formData, filter])
+  }, [formData])
 
 
   return (

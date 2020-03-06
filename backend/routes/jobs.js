@@ -104,9 +104,11 @@ router.delete("/:id", adminRequired, async function(req, res, next) {
 
 router.post("/:id/apply", authRequired, async function(req, res, next) {
   try {
-    const state = req.body.state || "applied";
-    await Job.apply(req.params.id, req.username, state);
-    return res.json({ message: state });
+    const action = req.body.state ? "unapply" : "apply";
+    await Job.toggleApply(req.params.id, req.username, action);
+    
+    const newState = req.body.state ? undefined : "applied";
+    return res.json({ message: newState});
   }
 
   catch (err) {

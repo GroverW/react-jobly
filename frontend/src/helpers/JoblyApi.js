@@ -123,9 +123,9 @@ class JoblyApi {
     return res.message;
   }
 
-  static async applyToJob(id) {
-    let res = await this.request(`jobs/${id}/apply`, {}, 'post');
-    return res.message;
+  static async applyToJob({ id, state }) {
+    let res = await this.request(`jobs/${id}/apply`, {state}, 'post');
+    return res;
   }
 }
 
