@@ -4,15 +4,14 @@ import './JobCard.css';
 
 function JobCard({ job }) {
   const [jobState, setJobState] = useState(job.state)
+  console.log("JOBSTATE: ", jobState);
 
   const handleApply = async () => {
-    if (!jobState) {
-      const result = await JoblyApi.applyToJob(job.id);
-
-      if (result) {
-        setJobState(result);
+      const result = await JoblyApi.applyToJob({id : job.id, state: job.state});
+      console.log("RESULT: ", result)
+      if (result.message) {
+        setJobState(result.message);
       }
-    }
 
   }
 
@@ -25,9 +24,8 @@ function JobCard({ job }) {
         <div>Salary: ${job.salary.toLocaleString('en-US')}</div>
         <div>Equity: {job.equity}</div>
       </div>
-      <div className="JobCard-apply">
+      <div className={`JobCard-apply ${jobState ? "JobCard-applied" : "" }`}>
         <button
-          disabled={jobState !== null}
           onClick={handleApply}>{jobAppState}
         </button>
       </div>

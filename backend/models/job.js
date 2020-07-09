@@ -140,25 +140,28 @@ class Job {
 
   /** Apply for job: update db, returns undefined. */
 
-  static async apply(id, username, state) {
-    console.log("APPLICATION", id, username, state);
+  static async toggleApply(id, username, action) {
       const result = await db.query(
           `SELECT id 
             FROM jobs 
             WHERE id = $1`,
           [id]);
 
-      console.log("JOB!!", result);
       if (result.rows.length === 0) {
         let notFound = new Error(`There exists no job '${id}`);
         notFound.status = 404;
         throw notFound;
       }
 
-      await db.query(
-          `INSERT INTO applications (job_id, username, state) 
-            VALUES ($1, $2, $3)`,
-          [id, username, state]);
+      if(action === "unapply") {
+        await db.query(
+          `DELETE FROM applications WHERE job_id=$1 AND username=$2`,[id, username]);
+      } else {
+        await db.query(
+            `INSERT INTO applications (job_id, username, state) 
+              VALUES ($1, $2, $3)`,
+            [id, username, "applied"]);
+      }
   }
 }
 

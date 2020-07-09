@@ -40,7 +40,6 @@
   background-color: rgb(211, 42, 42);
 }
 
-.JobCard-apply button:disabled {
-  cursor: default;
+.JobCard-apply.JobCard-applied button {
   background-color: rgb(255, 112, 112);
 }
